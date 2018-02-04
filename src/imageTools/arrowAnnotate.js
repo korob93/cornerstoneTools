@@ -60,6 +60,14 @@ function addNewMeasurement (mouseEventData) {
     external.$(mouseEventData.element).on('CornerstoneToolsMouseDown', eventData, arrowAnnotate.mouseDownCallback);
     external.$(mouseEventData.element).on('CornerstoneToolsMouseDownActivate', eventData, arrowAnnotate.mouseDownActivateCallback);
     external.$(mouseEventData.element).on('CornerstoneToolsMouseDoubleClick', eventData, arrowAnnotate.mouseDoubleClickCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element: mouseEventData.element,
+      measurementData
+    };
+
+    external.$(mouseEventData.element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   // Associate this data with this imageId so we can render it and manipulate it
@@ -315,6 +323,14 @@ function addNewMeasurementTouch (touchEventData) {
     external.$(element).on('CornerstoneToolsTouchPress', arrowAnnotateTouch.pressCallback);
     external.$(element).on('CornerstoneToolsTouchStartActive', arrowAnnotateTouch.touchDownActivateCallback);
     external.$(element).on('CornerstoneToolsTap', arrowAnnotateTouch.tapCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   addToolState(element, toolType, measurementData);
@@ -353,6 +369,14 @@ function doubleClickCallback (e, eventData) {
 
     data.active = false;
     cornerstone.updateImage(element);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData: data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !isMouseButtonEnabled(eventData.which, e.data.mouseButtonMask)) {
@@ -404,6 +428,14 @@ function pressCallback (e, eventData) {
     external.$(element).on('CornerstoneToolsTouchStart', arrowAnnotateTouch.touchStartCallback);
     external.$(element).on('CornerstoneToolsTouchStartActive', arrowAnnotateTouch.touchDownActivateCallback);
     external.$(element).on('CornerstoneToolsTap', arrowAnnotateTouch.tapCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData: data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !isMouseButtonEnabled(eventData.which, e.data.mouseButtonMask)) {

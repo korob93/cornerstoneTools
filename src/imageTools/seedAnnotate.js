@@ -316,6 +316,14 @@ function doubleClickCallback (e, eventData) {
 
     data.active = false;
     cornerstone.updateImage(element);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData: data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !isMouseButtonEnabled(eventData.which, e.data.mouseButtonMask)) {
@@ -370,6 +378,14 @@ function pressCallback (e, eventData) {
     external.$(element).on('CornerstoneToolsTouchStart', seedAnnotateTouch.touchStartCallback);
     external.$(element).on('CornerstoneToolsTouchStartActive', seedAnnotateTouch.touchDownActivateCallback);
     external.$(element).on('CornerstoneToolsTap', seedAnnotateTouch.tapCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !isMouseButtonEnabled(eventData.which, e.data.mouseButtonMask)) {

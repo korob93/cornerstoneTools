@@ -167,6 +167,14 @@ function doubleClickCallback (e, eventData) {
     external.$(element).on('CornerstoneToolsMouseDown', mouseButtonData, textMarker.mouseDownCallback);
     external.$(element).on('CornerstoneToolsMouseDownActivate', mouseButtonData, textMarker.mouseDownActivateCallback);
     external.$(element).on('CornerstoneToolsMouseDoubleClick', mouseButtonData, textMarker.mouseDoubleClickCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData: data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !isMouseButtonEnabled(eventData.which, e.data.mouseButtonMask)) {
@@ -225,6 +233,14 @@ function touchPressCallback (e, eventData) {
     external.$(element).on('CornerstoneToolsTouchStart', textMarkerTouch.touchStartCallback);
     external.$(element).on('CornerstoneToolsTap', textMarkerTouch.tapCallback);
     external.$(element).on('CornerstoneToolsTouchPress', textMarkerTouch.pressCallback);
+
+    const modifiedEventData = {
+      toolType,
+      element,
+      measurementData: data
+    };
+
+    external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   const config = textMarker.getConfiguration();
