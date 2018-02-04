@@ -1,4 +1,4 @@
-/*! cornerstone-tools - 1.0.1 - 2017-11-04 | (c) 2017 Chris Hafey | https://github.com/chafey/cornerstoneTools */
+/*! cornerstone-tools - 1.0.1 - 2018-02-04 | (c) 2017 Chris Hafey | https://github.com/chafey/cornerstoneTools */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("cornerstone-math"));
@@ -8,7 +8,7 @@
 		exports["cornerstoneTools"] = factory(require("cornerstone-math"));
 	else
 		root["cornerstoneTools"] = factory(root["cornerstoneMath"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_56__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_56__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -9700,6 +9700,14 @@ function addNewMeasurement(mouseEventData) {
     _externalModules.external.$(mouseEventData.element).on('CornerstoneToolsMouseDown', eventData, arrowAnnotate.mouseDownCallback);
     _externalModules.external.$(mouseEventData.element).on('CornerstoneToolsMouseDownActivate', eventData, arrowAnnotate.mouseDownActivateCallback);
     _externalModules.external.$(mouseEventData.element).on('CornerstoneToolsMouseDoubleClick', eventData, arrowAnnotate.mouseDoubleClickCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: mouseEventData.element,
+      measurementData: measurementData
+    };
+
+    _externalModules.external.$(mouseEventData.element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   // Associate this data with this imageId so we can render it and manipulate it
@@ -9953,6 +9961,14 @@ function addNewMeasurementTouch(touchEventData) {
     _externalModules.external.$(element).on('CornerstoneToolsTouchPress', arrowAnnotateTouch.pressCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTouchStartActive', arrowAnnotateTouch.touchDownActivateCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTap', arrowAnnotateTouch.tapCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: measurementData
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   (0, _toolState.addToolState)(element, toolType, measurementData);
@@ -9991,6 +10007,14 @@ function doubleClickCallback(e, eventData) {
 
     data.active = false;
     cornerstone.updateImage(element);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !(0, _isMouseButtonEnabled2.default)(eventData.which, e.data.mouseButtonMask)) {
@@ -10041,6 +10065,14 @@ function pressCallback(e, eventData) {
     _externalModules.external.$(element).on('CornerstoneToolsTouchStart', arrowAnnotateTouch.touchStartCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTouchStartActive', arrowAnnotateTouch.touchDownActivateCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTap', arrowAnnotateTouch.tapCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !(0, _isMouseButtonEnabled2.default)(eventData.which, e.data.mouseButtonMask)) {
@@ -13823,6 +13855,14 @@ function doubleClickCallback(e, eventData) {
 
     data.active = false;
     cornerstone.updateImage(element);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !(0, _isMouseButtonEnabled2.default)(eventData.which, e.data.mouseButtonMask)) {
@@ -13876,6 +13916,14 @@ function pressCallback(e, eventData) {
     _externalModules.external.$(element).on('CornerstoneToolsTouchStart', seedAnnotateTouch.touchStartCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTouchStartActive', seedAnnotateTouch.touchDownActivateCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTap', seedAnnotateTouch.tapCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      data: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !(0, _isMouseButtonEnabled2.default)(eventData.which, e.data.mouseButtonMask)) {
@@ -14592,6 +14640,14 @@ function doubleClickCallback(e, eventData) {
     _externalModules.external.$(element).on('CornerstoneToolsMouseDown', mouseButtonData, textMarker.mouseDownCallback);
     _externalModules.external.$(element).on('CornerstoneToolsMouseDownActivate', mouseButtonData, textMarker.mouseDownActivateCallback);
     _externalModules.external.$(element).on('CornerstoneToolsMouseDoubleClick', mouseButtonData, textMarker.mouseDoubleClickCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   if (e.data && e.data.mouseButtonMask && !(0, _isMouseButtonEnabled2.default)(eventData.which, e.data.mouseButtonMask)) {
@@ -14650,6 +14706,14 @@ function touchPressCallback(e, eventData) {
     _externalModules.external.$(element).on('CornerstoneToolsTouchStart', textMarkerTouch.touchStartCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTap', textMarkerTouch.tapCallback);
     _externalModules.external.$(element).on('CornerstoneToolsTouchPress', textMarkerTouch.pressCallback);
+
+    var modifiedEventData = {
+      toolType: toolType,
+      element: element,
+      measurementData: data
+    };
+
+    _externalModules.external.$(element).trigger('CornerstoneToolsMeasurementModified', modifiedEventData);
   }
 
   var config = textMarker.getConfiguration();
